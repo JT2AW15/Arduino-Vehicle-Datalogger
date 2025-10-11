@@ -34,7 +34,7 @@ Any MCP2515 based shield can be made to work, but here are some suggestions:
 Image + Link | Description | Price | Tested
 :--: | ---- | ---: | :--:
 [<img src="https://www.sparkfun.com/media/catalog/product/cache/a793f13fd3d678cea13d28206895ba0c/1/3/13262-01.jpg" width="200">](https://www.sparkfun.com/can-bus-shield.html) | Shield with CAN connectivity, built in LEDs, and a joystick for input.<br>What I used to build this. | $39.95 | ✅
-[<img src="https://productimages.microcenter.com/655014_464875_01_front_comping.jpg" width="200">](https://www.microcenter.com/product/655014/inland-ks0411-can-bus-shield) | Much more affordable, but lacks extra peripherals. | $6.99 | 
+[<img src="https://productimages.microcenter.com/655014_464875_01_front_zoom.jpg" width="200">](https://www.microcenter.com/product/655014/inland-ks0411-can-bus-shield) | Much more affordable, but lacks extra peripherals. | $6.99 | 
 
 ### RTC
 
