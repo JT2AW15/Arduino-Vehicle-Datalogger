@@ -39,6 +39,7 @@ I moved the chip select pin of the SD card on the RTC board to D6, cutting the t
 
 Ensure that devices have appropriate pullups/downs
 I wired 4.7kΩ pullup resistors to the SDA and SCL lines of the DS1307's I2C bus, using the provided breakouts on the RTC board.
+Uno R3 does not have input pulldowns, so depending on your analog inputs, you may want to add pulldown resistors to prevent floating.
 
 ## Reccomended Shields
 

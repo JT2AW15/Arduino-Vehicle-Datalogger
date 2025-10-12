@@ -11,8 +11,14 @@
 void shieldInit() {
 #if defined(ARDUINO_AVR_UNO)
   pinMode(A0, INPUT);
+  pinMode(A1, INPUT);
+  pinMode(A2, INPUT);
+  pinMode(A3, INPUT);
 #else
   pinMode(A0, INPUT_PULLDOWN);
+  pinMode(A1, INPUT_PULLDOWN);
+  pinMode(A2, INPUT_PULLDOWN);
+  pinMode(A3, INPUT_PULLDOWN);
 #endif // ARDUINO_AVR_UNO
 
   pinMode(RECORD_BUTTON,INPUT_PULLUP);
