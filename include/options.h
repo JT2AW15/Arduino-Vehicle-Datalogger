@@ -15,7 +15,8 @@ const uint32_t CAN_MSG5     = 0x0140;
 
 // Logged Data
 #define READANA               // enables reading analog data
-#define ANA_RATE 2            // how many CAN messages to record per analog signal
+#define ANACHNLS 1            // number of analog channels to record data on. MAX 4
+#define ANA_RATE 2            // how many CAN messages to record before recording every analog signal
 #define READCAN               // enables reading CAN messages
 //#define READPID             // filter accepts PID_REPLY and CAN_MSG0 to CAN_MSG4
 //#define READPIDREPLYONLY    // filter only accepts PID_REPLY message

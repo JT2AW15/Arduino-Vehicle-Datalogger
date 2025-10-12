@@ -15,6 +15,7 @@ Check that chip select pins, status LEDs, input buttons, etc. are assigned appro
 This is where settings based on data collection are configured.
 
 Up to six CAN messages can be filtered for, or no filter can be set and all CAN messages recorded.
+Up to four analog data channels can be recorded. Pins A4 and A5 are used for I2C communication, so it is not possible to also record data on these pins.
 Pacing for analog data can be configured, to only record analog data every nth CAN message recieved.
 
 ## Data Processing
@@ -27,9 +28,9 @@ There is an example script, `datapostprocessing/bintolog.py`, that converts bina
 ## Shield Modification
 
 Ensure that there are no overlapping chip select pins
-I moved the chip select pin of the SD card on the RTC board to D6, using the provided breakouts.
+I moved the chip select pin of the SD card on the RTC board to D6, cutting the trace, and using the provided breakouts.
 
-Ensure that buses have appropriate pullups/downs
+Ensure that devices have appropriate pullups/downs
 I wired 4.7kΩ pullup resistors to the SDA and SCL lines of the DS1307's I2C bus, using the provided breakouts on the RTC board.
 
 ## Reccomended Shields

@@ -37,7 +37,7 @@ void dump_buffer();
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("CANalogger");
+  Serial.println("Arduino Vehicle Datalogger");
   Serial.println();
 
   shieldInit();
@@ -103,7 +103,9 @@ void setup() {
 #endif // READCAN
 
 #if defined(READANA)
-  Serial.println("Reading Analog pin 0");
+  Serial.print("Reading first ");
+  Serial.print(ANACHNLS);
+  Serial.println("Analog pins");
 #endif // READANA
 
   Serial.println("Listening ...\n");
@@ -166,14 +168,16 @@ void loop() {
   // when allowed, write analogs to buffer
 #if defined(READANA) 
   if (query_buffer() && writestate == 1) {
+
+    for (size_t i = 0; i < ANACHNLS; i++) {
     tCAN anadat;
     int analogval;
 
-    anadat.rxID = A0;
+      anadat.rxID = A0 + i;
     anadat.rtr = false;
     anadat.ext = false;
     anadat.dlc = 2;
-    analogval = analogRead(A0);
+      analogval = analogRead(A0 + i);
     anadat.rxBuf[0] = analogval >> 8;
     anadat.rxBuf[1] = analogval;
     for (size_t i = 2; i < 8; i++) {
@@ -197,6 +201,7 @@ void loop() {
     Serial.print(",");
     Serial.print(anadat.rxBuf[0],HEX);
   #endif // SERIALLOGGING
+    }
   } else {
     ;
   }
