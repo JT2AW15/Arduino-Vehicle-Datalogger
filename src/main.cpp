@@ -15,6 +15,7 @@
 SdFs sd;
 FsFile dataFile;
 MCP_CAN CAN0(CANCS);
+RTC_DS1307 rtc;           // Set the type of RTC chip being used
 
 char datestring[25];
 char binfilename[(sizeof(datestring) + sizeof(FILEPREFIX) + sizeof(EXT_BIN) + 3)];
@@ -64,7 +65,7 @@ void setup() {
     Serial.println("Reading all CAN Messages");
 #endif // READALLCAN
 #if !defined(READALLCAN)
-  Serial.println("Setting Masks and Filters");
+  Serial.println("Setting Filters");
   #if defined(READPID)
   CAN0.init_Mask(0,0x7FF0000);
   CAN0.init_Filt(0,PID_REPLY<<16);
@@ -136,7 +137,9 @@ void loop() {
     if (!enqueue(msg)) {
       dump_buffer();
       if(!enqueue(msg)) {
-        Serial.print("Buffer err");
+  #if !defined(ARDUINO_AVR_UNO)
+          Serial.print("Buffer err");
+  #endif // ARDUINO_AVR_UNO
         writestate = 2;
       }
     }
@@ -170,37 +173,39 @@ void loop() {
   if (query_buffer() && writestate == 1) {
 
     for (size_t i = 0; i < ANACHNLS; i++) {
-    tCAN anadat;
-    int analogval;
+      tCAN anadat;
+      int analogval;
 
       anadat.rxID = A0 + i;
-    anadat.rtr = false;
-    anadat.ext = false;
-    anadat.dlc = 2;
+      anadat.rtr = false;
+      anadat.ext = false;
+      anadat.dlc = 2;
       analogval = analogRead(A0 + i);
-    anadat.rxBuf[0] = analogval >> 8;
-    anadat.rxBuf[1] = analogval;
-    for (size_t i = 2; i < 8; i++) {
-      anadat.rxBuf[i] = 0;
-    }
-    anadat.time = millis();
-    
-    if (!enqueue(anadat)) {
-      dump_buffer();
-      if(!enqueue(anadat)) {
-        Serial.print("Buffer err");
-        writestate = 2;
+      anadat.rxBuf[0] = analogval >> 8;
+      anadat.rxBuf[1] = analogval;
+      for (size_t i = 2; i < 8; i++) {
+        anadat.rxBuf[i] = 0;
       }
-    }
+      anadat.time = millis();
+      
+      if (!enqueue(anadat)) {
+        dump_buffer();
+        if(!enqueue(anadat)) {
+  #if !defined(ARDUINO_AVR_UNO)
+          Serial.print("Buffer err");
+  #endif // ARDUINO_AVR_UNO
+          writestate = 2;
+        }
+      }
 
-  #if defined(SERIALLOGGING)
-    Serial.print("time");
-    Serial.print(anadat.time);
-    Serial.print(",");
-    Serial.print(anadat.rxID,HEX);
-    Serial.print(",");
-    Serial.print(anadat.rxBuf[0],HEX);
-  #endif // SERIALLOGGING
+    #if defined(SERIALLOGGING)
+      Serial.print("time");
+      Serial.print(anadat.time);
+      Serial.print(",");
+      Serial.print(anadat.rxID,HEX);
+      Serial.print(",");
+      Serial.print(anadat.rxBuf[0],HEX);
+    #endif // SERIALLOGGING
     }
   } else {
     ;
@@ -307,7 +312,7 @@ bool rtc_init() {
   lightUpdate(STATUS_LED, 0);
 
   return true;
-}
+}  
 
 bool query_buffer() {
 #if !defined(ANA_RATE)

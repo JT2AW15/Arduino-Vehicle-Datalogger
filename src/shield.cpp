@@ -15,10 +15,6 @@ void shieldInit() {
   pinMode(A0, INPUT_PULLDOWN);
 #endif // ARDUINO_AVR_UNO
 
-  pinMode(UP,INPUT_PULLUP);
-  digitalWrite(UP, HIGH);
-  pinMode(LEFT,INPUT_PULLUP);
-  digitalWrite(LEFT, HIGH);
   pinMode(RECORD_BUTTON,INPUT_PULLUP);
   digitalWrite(RECORD_BUTTON, HIGH);
 

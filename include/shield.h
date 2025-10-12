@@ -9,7 +9,6 @@
 #define CAN0_INT 2        // CAN interrupt pin
 
 // Datalogger Shield
-RTC_DS1307 rtc;           // Set the type of RTC chip being used
 #define DS1307_ADR 0x68   // Set the I2C of the RTC chip
 #define SDCS 6            // Chip select pin of SD/microSD card being used to store data
 

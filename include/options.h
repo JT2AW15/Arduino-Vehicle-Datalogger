@@ -38,11 +38,7 @@ const uint32_t CAN_MSG5     = 0x0140;
 
 
 #if defined(ARDUINO_AVR_UNO)
-  #if defined(SERIALLOGGING)
-    #define F_BUFFSIZE  22        // Uno R3 hardware limits force a smaller buffer size
-  #else
-    #define F_BUFFSIZE  25        // Uno R3 hardware limits force a smaller buffer size
-  #endif // SERIALLOGGING
+#define F_BUFFSIZE  25        // Uno R3 hardware limits force a smaller buffer size
 #endif // ARDUINO_AVR_UNO
 
 

@@ -6,12 +6,15 @@ This code, along with some shields, turns your Arduino Uno R4 or R3 into a combi
 Ensure that the voltage of analog inputs does not exceed the limits of the hardware you are using!
 
 ## Configuration
-### shield.h
+### `include\shield.h`
 This is where settings based on hardware are configured.
 
 Check that chip select pins, status LEDs, input buttons, etc. are assigned appropriatly.
 
-### options.h
+##### RTC note
+The type of RTC chip being used needs to be configured on line 18 of `src/main.cpp`.
+
+### `include\options.h`
 This is where settings based on data collection are configured.
 
 Up to six CAN messages can be filtered for, or no filter can be set and all CAN messages recorded.
@@ -41,14 +44,14 @@ Any MCP2515 based shield can be made to work, but here are some suggestions:
 
 Image + Link | Description | Price | Tested
 :--: | ---- | ---: | :--:
-[<img src="https://www.sparkfun.com/media/catalog/product/cache/a793f13fd3d678cea13d28206895ba0c/1/3/13262-01.jpg" width="200">](https://www.sparkfun.com/can-bus-shield.html) | Shield with CAN connectivity, built in LEDs, and a joystick for input.<br>What I used to build this. | $39.95 | ✅
+[<img src="https://www.sparkfun.com/media/catalog/product/cache/a793f13fd3d678cea13d28206895ba0c/1/3/13262-01.jpg" width="200">](https://www.sparkfun.com/can-bus-shield.html) | Shield with CAN connectivity, built in LEDs, and a joystick for input. | $39.95 | ✅
 [<img src="https://productimages.microcenter.com/655014_464875_01_front_zoom.jpg" width="200">](https://www.microcenter.com/product/655014/inland-ks0411-can-bus-shield) | Much more affordable, but lacks extra peripherals. | $6.99 | 
 
 ### RTC
 
-Any RTC chip should work, but here are some suggestions:
+Any RTC chip supported by RTClib should work, but here are some suggestions:
 
 Image + Link | Description | Price | Tested
 :--: | ---- | ---: | :--:
-[<img src="https://m.media-amazon.com/images/I/61A8iYOE2JL._SX522_.jpg" width="200">](https://www.amazon.com/HiLetgo-Logging-Recorder-Logger-Arduino/dp/B00PI6TQWO) | A clone of an older Adafruit design, has an SD card port which I find preferable to microSD.<br>Also has plenty of space to add LEDs or buttons.<br>What I used to build this. | $7.99 | ✅
-[<img src="https://cdn-shop.adafruit.com/230x173/1141-12.jpg" width="200">](https://www.adafruit.com/product/1141) | Uses PCF8523 instead of DS1307. An updated version of the board the one above was based on. | $13.95 | 
+[<img src="https://m.media-amazon.com/images/I/61A8iYOE2JL._SX522_.jpg" width="200">](https://www.amazon.com/HiLetgo-Logging-Recorder-Logger-Arduino/dp/B00PI6TQWO) | A clone of an older Adafruit design, has an SD card port which I find preferable to microSD. Also has plenty of space to add LEDs or buttons. | $7.99 | ✅
+[<img src="https://cdn-shop.adafruit.com/230x173/1141-12.jpg" width="200">](https://www.adafruit.com/product/1141) | An updated version of the board the one above was based on. Uses a different RTC, PCF8523 instead of DS1307. | $13.95 | 
