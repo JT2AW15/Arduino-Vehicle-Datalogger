@@ -17,6 +17,13 @@ This is where settings based on data collection are configured.
 Up to six CAN messages can be filtered for, or no filter can be set and all CAN messages recorded.
 Pacing for analog data can be configured, to only record analog data every nth CAN message recieved.
 
+## Data Processing
+
+Data saved is in a binary format, following the structure defined in `include/tCAN.h`.
+For simplicity, analog signals are saved the same as CAN messages, with their message ID being equal to the value of the pin. 
+
+There is an example script, `datapostprocessing/bintolog.py`, that converts binary files into human readable text logs of all message data.
+
 ## Shield Modification
 
 Ensure that there are no overlapping chip select pins
