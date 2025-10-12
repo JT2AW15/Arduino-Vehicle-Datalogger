@@ -21,6 +21,10 @@ Up to six CAN messages can be filtered for, or no filter can be set and all CAN 
 Up to four analog data channels can be recorded. Pins A4 and A5 are used for I2C communication, so it is not possible to also record data on these pins.
 Pacing for analog data can be configured, to only record analog data every nth CAN message recieved.
 
+### Building for Uno R3
+
+In the file `.pio/libdeps/uno_r3/mcp_can/mcp_can_dfs.h`, defining `DEBUG_MODE` as `0` on line 41 can help save memory if you are building with `SERIALLOGGING` defined in `include\options.h`.
+
 ## Data Processing
 
 Data saved is in a binary format, following the structure defined in `include/tCAN.h`.
